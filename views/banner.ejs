@@ -19,7 +19,7 @@
     <%- include('./common/header.ejs'); %>
     <div class="layout-body">
 
-      <button class="btn btn-default" data-toggle="modal" data-target="#myModal">新增</button>
+      <button class="btn btn-default" data-toggle="modal" data-target="#addModal">新增</button>
 
       <table id="banner-table" class="layui-table">
         <colgroup>
@@ -53,8 +53,8 @@
       </table>
       
       <nav aria-label="Page navigation">
-        <ul class="pagination">
-          <li>
+        <ul id="pagination" class="pagination">
+          <!-- <li>
             <a href="#" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
             </a>
@@ -68,12 +68,12 @@
             <a href="#" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
             </a>
-          </li>
+          </li> -->
         </ul>
       </nav>
 
       <!-- 新增banenr -->
-      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
