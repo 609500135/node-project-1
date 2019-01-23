@@ -73,6 +73,8 @@
     })
   }
 
+  
+
   /**
    * 渲染table
    */
@@ -90,8 +92,8 @@
               alt="">
             </td>
             <td>
-              <a href="javascript:;">删除</a>
-              <a href="javascript:;">修改</a>
+              <a class="delete" data-id="${item._id}" href="javascript:;">删除</a>
+              <a class="update" data-id="${item._id}" href="javascript:;">修改</a>
             </td>
           </tr>
         `
@@ -165,6 +167,19 @@
       // 3. 再次调用一下 this.search 
       that.search();
     })
+
+    // 删除按钮点击
+    this.dom.table.on('click', '.delete', function () {
+      // 1. 得到id
+      var id = $(this).data('id');
+
+      // 2. 二次确认框
+      layer.confirm('确认删除么', function () {
+        console.log('确认');
+      }, function () {
+        console.log('取消');
+      })
+    }) 
   }
 
 
