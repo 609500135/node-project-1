@@ -4,6 +4,10 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const app = express();
 
+const kuayu = require('./middlewares/kuayu');
+
+app.use(kuayu);
+
 // 引入的路由中间的文件
 const indexRouter = require('./routes/index');
 const bannerRouter = require('./routes/banner');
