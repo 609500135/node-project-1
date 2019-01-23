@@ -23,27 +23,63 @@
   // 新增的方法
   Banner.prototype.add = function () {
     var that = this;
-    $.post('/banner/add', {
-      bannerName: this.dom.nameInput.val(),
-      bannerUrl: this.dom.urlInput.val()
-    }, function (res) {
-      if (res.code === 0) {
-        // 成功
-        layer.msg('添加成功');
-        
-        // 请求一下数据
-        that.search();
-      } else {
-        // PS: 很多时候，真正的错误信息不会给到用户去看。
-        layer.msg('网络异常，请稍后重试');
-      }
+    // ajax 提交，并且带有文件
 
-      // 手动调用关闭的方法
-      that.dom.addModal.modal('hide');
-      // 手动清空输入框的内容
-      that.dom.nameInput.val('');
-      that.dom.urlInput.val('');
-    });
+    // 1. 实例化一个 FormData 对象
+    var formData = new FormData();
+
+    // 2. 给 formData 对象 加属性
+    formData.append('bannerName', this.dom.nameInput.val());
+    formData.append('bannerImg', this.dom.urlInput[0].files[0]);
+
+    $.ajax({
+      url: '/banner/add',
+      method: 'POST',
+      // ！！！！！！！！！ , 上传文件的时候，需要设置这两个属性
+      contentType: false,
+      processData: false,
+      data: formData,
+      success: function () {
+        layer.msg('添加成功');
+        // 
+        that.search();
+      },
+      error: function (error) {
+        console.log(error.message);
+        layer.msg('网络异常，请稍后重试');
+      },
+      complete: function () {
+        // 不管成功还是失败，都会进入的一个回调函数
+        // 手动调用关闭的方法
+        that.dom.addModal.modal('hide');
+        // 手动清空输入框的内容
+        that.dom.nameInput.val('');
+        that.dom.urlInput.val('');
+      }
+    })
+
+
+    // $.post('/banner/add', {
+    //   bannerName: this.dom.nameInput.val(),
+    //   bannerUrl: this.dom.urlInput.val()
+    // }, function (res) {
+    //   if (res.code === 0) {
+    //     // 成功
+    //     layer.msg('添加成功');
+        
+    //     // 请求一下数据
+    //     that.search();
+    //   } else {
+    //     // PS: 很多时候，真正的错误信息不会给到用户去看。
+    //     layer.msg('网络异常，请稍后重试');
+    //   }
+
+    //   // 手动调用关闭的方法
+    //   that.dom.addModal.modal('hide');
+    //   // 手动清空输入框的内容
+    //   that.dom.nameInput.val('');
+    //   that.dom.urlInput.val('');
+    // });
   }
 
   // 查询的方法
