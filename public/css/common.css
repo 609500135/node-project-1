@@ -61,3 +61,12 @@ body {
   margin: 0 auto;
   height: 50px;
 }
+
+
+
+
+
+/* ========= 对 layui 的样式的覆盖================= */
+.layui-header {
+  background-color: #393D49;
+}
